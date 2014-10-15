@@ -1,0 +1,4 @@
+name = Link wo value Formatter
+description = Defines a field formatter to display link without value. Necessary for icon links.
+core = 7.x
+dependencies[] = link

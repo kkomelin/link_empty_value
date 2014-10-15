@@ -1,0 +1,76 @@
+<?php
+/*
+ * @file link_empty_value.module
+ * Based on http://drupal.org/project/link_image
+ * 
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function link_empty_value_field_formatter_info() {
+  return array(
+    'link_empty_value_formatter' => array(
+      'label' => t('Link wo value'),
+      'field types' => array('link_field'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ * 
+ * Declare necessary theme functions.
+ */
+function link_empty_value_theme() {
+  return array(
+    'link_empty_value_formatter' => array(
+      'variables' => array('element' => NULL, 'field' => NULL),
+    ),
+  );
+}
+
+
+/*
+* Implements hook_field_formatter_view().
+ */
+function link_empty_value_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $elements = array();
+  foreach ($items as $delta => $item) {
+    $elements[$delta] = array(
+      '#theme' => 'link_empty_value_formatter',
+      '#element' => $item,
+      '#field' => $instance,
+      '#display' => $display,
+    );
+  }
+  return $elements;
+}
+
+/**
+ * Formats a link.
+ */
+function theme_link_empty_value_formatter($vars) {
+
+  $link_options = $vars['element'];
+  unset($link_options['title']);
+  unset($link_options['url']);
+
+  if (isset($link_options['attributes']['class'])) {
+    $link_options['attributes']['class'] = array($link_options['attributes']['class']);
+  }
+
+  // Display a normal link if both title and URL are available.
+  if (!empty($vars['element']['title']) && !empty($vars['element']['url'])) {
+    return l('', $vars['element']['url'], $link_options);
+  }
+  // If only a title, display the title.
+  elseif (!empty($vars['element']['title'])) {
+    return check_plain($vars['element']['title']);
+  }
+  elseif (!empty($vars['element']['url'])) {
+
+    return l($vars['element']['title'], $vars['element']['url'], $link_options);
+  }
+}
