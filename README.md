@@ -5,7 +5,7 @@ Drupal 7 module that defines a field formatter to display link without value. It
 
 ## How to use
 
-1.  Install an iconic font, for example FontAwesome.  
+1.  Install an iconic font, for example [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 2.  Add a Link field for a content type  
 3.  Choose 'Link wo value' formatter for the field  
 4.  Set "fa fa-drupal" value to "Additional CSS Class" in the field settings  
