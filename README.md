@@ -12,7 +12,7 @@ Drupal 7 module that defines a field formatter to display link without value. It
 5.  Enjoy your icon link.  
 
 
-You'll have the following HTML link in result:
+You'll have the following HTML link in result:  
 ```<a class="fa fa-twitter" href="https://twitter.com/kkomelin"></a>```
 
 ## Dependencies
